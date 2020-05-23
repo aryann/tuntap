@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Deletes the "tun0" network interface.
+
+set -o errexit
+
+ip tuntap del mode tun tun0

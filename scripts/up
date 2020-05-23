@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Creates a new TUN device called "tun0" and modifies the routing
+# table to route all IP packets destined for 10.0.0.0/24 to the new
+# device.
+
+set -o errexit
+
+readonly OWNER="${SUDO_USER:-$USER}"
+
+ip tuntap add mode tun user "${OWNER?}" dev tun0
+ip link set tun0 up
+ip addr add 10.0.0.0/24 dev tun0
